@@ -41,7 +41,7 @@ public class MemberCommandServiceImpl implements IMemberCommandService{
         // 유저 선호 음식 리스트 생성
         List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(foodCategoryList);
 
-        //
+        // 양방향 매핑
         for(MemberPrefer memberPrefer : memberPreferList){
             memberPrefer.setMember(newMember);
         }
