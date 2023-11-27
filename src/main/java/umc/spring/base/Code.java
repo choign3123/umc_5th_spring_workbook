@@ -42,6 +42,9 @@ public enum Code {
     // Region Error
     REGION_NOT_FOUND(HttpStatus.NOT_FOUND, "REGION4001", "지역이 없습니다"),
 
+    // Mission Error
+    MISSION_DEADLINE_FORMAT_NOT_MATCH(HttpStatus.BAD_REQUEST, "MISSION4001", "미션 마감일 형식이 일치하지 않습니다"),
+
     // For test
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트");
 
