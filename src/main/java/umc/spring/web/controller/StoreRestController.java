@@ -1,5 +1,6 @@
 package umc.spring.web.controller;
 
+import io.swagger.v3.oas.annotations.headers.Header;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,17 @@ public class StoreRestController {
         Mission newMission = missionCommandService.createMission(storeId, request);
 
         return ResponseDto.onSuccess(StoreResponse.toCreateMissionDTO(newMission), Code.OK);
+    }
+
+    /**
+     * 미션 도전하기
+     */
+    @PostMapping("/{store-id}/mission/{mission-id}")
+    public ResponseDto challengeMission(@PathVariable("store-id") Long storeId, @PathVariable("mission-id")Long missionId, @RequestHeader("member_id") Long memberId){
+
+        missionCommandService.challengeMission(memberId, storeId, missionId);
+
+        return ResponseDto.onSuccess(null, Code.OK);
     }
 
 }
