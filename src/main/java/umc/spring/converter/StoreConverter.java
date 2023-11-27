@@ -1,10 +1,13 @@
 package umc.spring.converter;
 
 import org.springframework.data.domain.Page;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
+import umc.spring.domain.Store;
 import umc.spring.web.dto.StoreRequest;
 import umc.spring.web.dto.StoreResponse;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +33,19 @@ public class StoreConverter {
                 .totalElements(reviewList.getTotalElements())
                 .listSize(reviewPreViewDTOList.size())
                 .reviewList(reviewPreViewDTOList)
+                .build();
+    }
+
+    public static StoreResponse.CreateMissionDTO toCreateMissionDTO(Mission mission){
+        return StoreResponse.CreateMissionDTO.builder()
+                .missionId(mission.getId())
+                .build();
+    }
+
+    public static StoreResponse.CreateStoreDTO toCreateStoreDTO(Store store){
+
+        return StoreResponse.CreateStoreDTO.builder()
+                .storeId(store.getId())
                 .build();
     }
 }

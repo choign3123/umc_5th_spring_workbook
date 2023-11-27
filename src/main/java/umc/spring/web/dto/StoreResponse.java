@@ -22,13 +22,6 @@ public class StoreResponse {
         private Long storeId;
     }
 
-    public static CreateStoreDTO toCreateStoreDTO(Store store){
-
-        return CreateStoreDTO.builder()
-                .storeId(store.getId())
-                .build();
-    }
-
     @AllArgsConstructor
     @Builder
     @Getter
@@ -36,12 +29,6 @@ public class StoreResponse {
 
         @JsonProperty("mission_id")
         private Long missionId;
-    }
-
-    public static CreateMissionDTO toCreateMissionDTO(Mission mission){
-        return CreateMissionDTO.builder()
-                .missionId(mission.getId())
-                .build();
     }
 
     @Builder

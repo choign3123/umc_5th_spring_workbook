@@ -14,13 +14,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.base.Code;
 import umc.spring.base.ResponseDto;
+import umc.spring.converter.ReviewConverter;
 import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
 import umc.spring.service.MissionService.IMissionCommandService;
+import umc.spring.service.ReviewService.IReviewCommandService;
 import umc.spring.service.StoreService.IStoreCommandService;
 import umc.spring.service.StoreService.IStoreQueryService;
+import umc.spring.web.dto.ReviewRequest;
+import umc.spring.web.dto.ReviewResponse;
 import umc.spring.web.dto.StoreRequest;
 import umc.spring.web.dto.StoreResponse;
 
@@ -33,6 +37,7 @@ public class StoreRestController {
     private final IStoreCommandService storeCommandService;
     private final IMissionCommandService missionCommandService;
     private final IStoreQueryService storeQueryService;
+    private final IReviewCommandService reviewCommandService;
 
     /**
      * 특정 지역에 가게 추가하기
@@ -44,7 +49,7 @@ public class StoreRestController {
 
         Store newStore = storeCommandService.createStore(request);
 
-        return ResponseDto.onSuccess(StoreResponse.toCreateStoreDTO(newStore), Code.OK);
+        return ResponseDto.onSuccess(StoreConverter.toCreateStoreDTO(newStore), Code.OK);
     }
 
     /**
@@ -55,7 +60,7 @@ public class StoreRestController {
 
         Mission newMission = missionCommandService.createMission(storeId, request);
 
-        return ResponseDto.onSuccess(StoreResponse.toCreateMissionDTO(newMission), Code.OK);
+        return ResponseDto.onSuccess(StoreConverter.toCreateMissionDTO(newMission), Code.OK);
     }
 
     /**
@@ -88,5 +93,15 @@ public class StoreRestController {
         Page<Review> reviewList = storeQueryService.getReviewList(storeId, page);
 
         return ResponseDto.onSuccess(StoreConverter.reviewPreViewListDTO(reviewList), Code.OK);
+    }
+
+    /**
+     * 가게에 리뷰 추가하기
+     */
+    public ResponseDto<ReviewResponse.AddReviewDTO> addReview(@PathVariable("store-id") Long storeId, @RequestBody ReviewRequest.AddReviewDTO request){
+
+        Review newReivew = reviewCommandService.saveReview(storeId, request);
+
+        return ResponseDto.onSuccess(ReviewConverter.toAddReviewDTO(newReivew), Code.OK);
     }
 }

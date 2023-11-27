@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.base.Code;
 import umc.spring.base.exception.MissionException;
+import umc.spring.converter.MissionConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Store;
@@ -43,11 +44,7 @@ public class MissionCommandServiceImpl implements IMissionCommandService{
 
         Store store = storeQueryService.findStore(storeId);
 
-        Mission newMission = Mission.builder()
-                .reward(request.getReward())
-                .deadline(LocalDate.parse(request.getDeadline()))
-                .missionSpec(request.getMissionSpec())
-                .build();
+        Mission newMission = MissionConverter.toMission(request);
 
         // 양방향 맵핑
         newMission.setStore(store);
