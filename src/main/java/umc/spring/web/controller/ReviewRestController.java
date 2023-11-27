@@ -17,7 +17,6 @@ public class ReviewRestController {
 
     private final IReviewCommandService reviewCommandService;
 
-
     // 가게에 리뷰 추가하기
     @PostMapping("/{store-id}/review")
     public ResponseDto<ReviewResponse.AddReviewDTO> addReview(@PathVariable("store-id") Long storeId, @RequestBody ReviewRequest.AddReviewDTO request){
