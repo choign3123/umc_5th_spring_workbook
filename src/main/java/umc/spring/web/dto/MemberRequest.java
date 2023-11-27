@@ -21,4 +21,5 @@ public class MemberRequest {
         @ExistCategories
         List<Long> preferCategory;
     }
+
 }
