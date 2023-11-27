@@ -43,19 +43,9 @@ public class MissionCommandServiceImpl implements IMissionCommandService{
 
         Store store = storeQueryService.findStore(storeId);
 
-        // 마감일 Date타입으로 변환
-        LocalDate deadline;
-        try{
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            deadline = simpleDateFormat.parse(request.getDeadline())
-                    .toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        } catch (ParseException e){
-            throw new MissionException(Code.MISSION_DEADLINE_FORMAT_NOT_MATCH);
-        }
-
         Mission newMission = Mission.builder()
                 .reward(request.getReward())
-                .deadline(deadline)
+                .deadline(LocalDate.parse(request.getDeadline()))
                 .missionSpec(request.getMissionSpec())
                 .build();
 
