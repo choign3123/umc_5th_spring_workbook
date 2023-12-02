@@ -54,4 +54,33 @@ public class StoreResponse {
         String body;
         LocalDate createdAt;
     }
+
+    public static class MissionListDTO{
+
+        @JsonProperty("missions")
+        List<MissionDTO> missionList;
+
+        @JsonProperty("list_size")
+        Integer missionsSize;
+
+        @JsonProperty("total_page")
+        Integer totalPage;
+
+        @JsonProperty("total_review")
+        Long totalMission;
+
+        @JsonProperty("is_first")
+        Boolean isFirst;
+
+        @JsonProperty("is_last")
+        Boolean isLast;
+    }
+
+    public static class MissionDTO{
+        @JsonProperty("mission_id")
+        private Long missionId;
+        private String spec;
+        private int reward;
+        private LocalDate deadline;
+    }
 }

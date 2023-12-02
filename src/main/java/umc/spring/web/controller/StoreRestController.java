@@ -20,6 +20,7 @@ import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
 import umc.spring.service.MissionService.IMissionCommandService;
+import umc.spring.service.MissionService.IMissionQueryService;
 import umc.spring.service.ReviewService.IReviewCommandService;
 import umc.spring.service.StoreService.IStoreCommandService;
 import umc.spring.service.StoreService.IStoreQueryService;
@@ -38,6 +39,7 @@ public class StoreRestController {
     private final IMissionCommandService missionCommandService;
     private final IStoreQueryService storeQueryService;
     private final IReviewCommandService reviewCommandService;
+    private final IMissionQueryService missionQueryService;
 
     /**
      * 특정 지역에 가게 추가하기
@@ -103,5 +105,15 @@ public class StoreRestController {
         Review newReivew = reviewCommandService.saveReview(storeId, request);
 
         return ResponseDto.onSuccess(ReviewConverter.toAddReviewDTO(newReivew), Code.OK);
+    }
+
+    /**
+     * 특정 가게 리뷰 목록 조회
+     */
+    public ResponseDto<StoreResponse.MissionListDTO> getMissionList(@PathVariable("store-id") Long storeId, @RequestParam("page") int page){
+
+        Page<Mission> missionPage = missionQueryService.getMissionList(storeId, page);
+
+        return null;
     }
 }
