@@ -64,5 +64,7 @@ public class MissionCommandServiceImpl implements IMissionCommandService{
 
         memberMission.setMission(mission);
         memberMission.setMember(member);
+
+
     }
 }
