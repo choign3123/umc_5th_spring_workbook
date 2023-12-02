@@ -2,6 +2,8 @@ package umc.spring.domain.mapping;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.common.BaseEntity;
@@ -14,6 +16,8 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@DynamicUpdate
+@DynamicInsert
 public class MemberMission extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
