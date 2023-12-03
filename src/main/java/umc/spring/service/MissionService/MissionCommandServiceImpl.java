@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.base.Code;
+import umc.spring.base.exception.GeneralException;
 import umc.spring.base.exception.MissionException;
 import umc.spring.converter.MissionConverter;
 import umc.spring.domain.Member;
@@ -69,5 +70,17 @@ public class MissionCommandServiceImpl implements IMissionCommandService{
         memberMission.setMember(member);
 
         memberMissionRepository.save(memberMission);
+    }
+
+    // 진행중인 미션 진행 완료로 바꾸기
+    @Transactional
+    public void missionComplete(Long memberId, Long missionId){
+        Member member = memberQueryService.findMember(memberId);
+        Mission mission = missionQueryService.findMission(missionId);
+
+        MemberMission memberMission = memberMissionRepository.findByMemberAndMission(member, mission)
+                .orElseThrow(() -> new GeneralException(Code.MEMBER_MISSION_NOT_FOUND));
+
+        memberMission.completeMission();
     }
 }
