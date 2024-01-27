@@ -23,7 +23,7 @@ jobs:
       - name: Set application.yml
         uses: microsoft/variable-substitution@v1
         with:
-          files: ./src/main/resources/application-dev.yml
+          files: ./src/main/resources/application.yml
         env:
           spring.datasource.url: ${{ secrets.AWS_RDS_URL }}
           spring.datasource.username: ${{ secrets.AWS_RDS_USERNAME }}
