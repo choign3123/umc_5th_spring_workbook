@@ -1,11 +1,7 @@
 package umc.spring.web.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import umc.spring.base.Code;
 import umc.spring.base.ResponseDto;
 import umc.spring.converter.TempConverter;
@@ -30,5 +26,20 @@ public class TempRestController {
         tempQueryService.CheckFlag(flag);
 
         return ResponseDto.onSuccess(TempConverter.toTempExceptionDTO(flag), Code.OK);
+    }
+
+    @GetMapping("/header")
+    public ResponseDto<Integer> includeHeader(@RequestHeader("value") int value){
+        return ResponseDto.onSuccess(value, Code.OK);
+    }
+
+    @GetMapping("/header2")
+    public ResponseDto<Integer> includeHeader2(@RequestHeader(value = "value", required = false) int value){
+        return ResponseDto.onSuccess(value, Code.OK);
+    }
+
+    @GetMapping("/body")
+    public ResponseDto<Integer> includeBody(@RequestBody int value){
+        return ResponseDto.onSuccess(value, Code.OK);
     }
 }
