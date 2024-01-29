@@ -38,6 +38,11 @@ public class TempRestController {
         return ResponseDto.onSuccess(value, Code.OK);
     }
 
+    @GetMapping("/header3")
+    public ResponseDto<Integer> includeHeader3(@RequestHeader(name = "value_id") int value){
+        return ResponseDto.onSuccess(value, Code.OK);
+    }
+
     @GetMapping("/body")
     public ResponseDto<Integer> includeBody(@RequestBody int value){
         return ResponseDto.onSuccess(value, Code.OK);
